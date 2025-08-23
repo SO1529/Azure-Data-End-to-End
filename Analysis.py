@@ -39,3 +39,15 @@ df = df[(np.abs(stats.zscore(df[numeric_cols])) < 3).all(axis=1)]
 
 print("Cleaned Shape:", df.shape)
 df.head()
+
+# Summary statistics
+summary = df.describe().T
+display(summary)
+
+# Correlation matrix
+corr = df.select_dtypes(include=[np.number]).corr()
+
+plt.figure(figsize=(10,6))
+sns.heatmap(corr, annot=True, cmap="coolwarm", fmt=".2f")
+plt.title("Correlation Heatmap")
+plt.show()
